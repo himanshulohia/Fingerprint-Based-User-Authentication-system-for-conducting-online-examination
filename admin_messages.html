@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Messages</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #1f2a3a;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .main-content h2 {
+            color: #2e3b4e;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        footer {
+            background-color: #2e3b4e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .message-form {
+            margin-top: 20px;
+        }
+        .message-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .message-form input, .message-form textarea, .message-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .message-form input[type="submit"] {
+            background-color: #2e3b4e;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .message-form input[type="submit"]:hover {
+            background-color: #1f2a3a;
+        }
+        .messages {
+            margin-top: 20px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border-radius: 5px;
+        }
+        .message .sender {
+            font-weight: bold;
+            color: #2e3b4e;
+        }
+        .message .timestamp {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <a href="{{ url_for('admin_jobs') }}">Jobs</a>
+            <a href="{{ url_for('admin_messages') }}">Messages</a>
+            <a href="{{ url_for('admin_notifications') }}">Notifications</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="card">
+                <h3>Messages</h3>
+                <p>This section allows you to send and receive messages from candidates.</p>
+                <div class="message-form">
+                    <form action="{{ url_for('admin_messages') }}" method="POST">
+                        <label for="recipient">Recipient:</label>
+                        <select id="recipient" name="recipient" required>
+                            <option value="">Select a candidate</option>
+                            {% for candidate in candidates %}
+                                <option value="{{ candidate['username'] }}">{{ candidate['username'] }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+                        
+                        <input type="submit" value="Send Message">
+                    </form>
+                </div>
+                <div class="messages">
+                    {% for msg in messages %}
+                        <div class="message">
+                            <p class="sender"><strong>{{ msg.sender }} to {{ msg.recipient }}:</strong></p>
+                            <p>{{ msg.message }}</p>
+                            <p class="timestamp">{{ msg.timestamp if 'timestamp' in msg else 'No timestamp available' }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 DRDO Recruitment Assessment Center. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+    "results": [
+        {
+            "username": "Himanshu Lohia",
+            "job_id": 1,
+            "cv_filename": "Resume.pdf",
+            "answers": {
+                "question1": null,
+                "question2": null,
+                "question3": null
+            },
+            "status": "Submitted"
+        }
+    ]
+}

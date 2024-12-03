@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #1f2a3a;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .job-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .job-card h3 {
+            margin-top: 0;
+        }
+        .job-card a {
+            display: inline-block;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .job-card a:hover {
+            background-color: #1f2a3a;
+        }
+        footer {
+            background-color: #2e3b4e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Candidate Dashboard</h2>
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('jobs') }}">Jobs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="main-content">
+            <h1>Available Jobs</h1>
+            {% for job in jobs %}
+            <div class="job-card">
+                <h3>{{ job.title }}</h3>
+                <p>{{ job.description }}</p>
+                <a href="{{ url_for('job_detail', job_id=job.id) }}">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 DRDO Recruitment Assessment Center. All rights reserved.</p>
+    </footer>
+</body>
+</html>

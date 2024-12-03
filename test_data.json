@@ -1,0 +1,12 @@
+{
+    "Junior Scientist": [
+        {"question_id": 1, "question": "What is the fundamental unit of life?", "options": ["Cell", "Tissue", "Organ", "System"], "answer": "Cell"},
+        {"question_id": 2, "question": "Which of the following is not a macronutrient?", "options": ["Carbohydrate", "Protein", "Vitamin", "Fat"], "answer": "Vitamin"},
+        {"question_id": 3, "question": "What is the powerhouse of the cell?", "options": ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"], "answer": "Mitochondria"}
+    ],
+    "Software Intern": [
+        {"question_id": 1, "question": "What is the time complexity of binary search?", "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"], "answer": "O(log n)"},
+        {"question_id": 2, "question": "Which of the following is a Python data type?", "options": ["int", "float", "str", "all of the above"], "answer": "all of the above"},
+        {"question_id": 3, "question": "What does HTML stand for?", "options": ["Hypertext Markup Language", "High-Level Text Markup Language", "Hyperlink and Text Markup Language", "None of the above"], "answer": "Hypertext Markup Language"}
+    ]
+}

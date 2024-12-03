@@ -1,0 +1,28 @@
+{
+    "users": [
+        {
+            "username": "Rishi Singhal",
+            "email": "rishi@admin.com",
+            "password": "12345",
+            "role": "admin"
+        },
+        {
+            "username": "Rishi",
+            "email": "rishisinghal@candidate.com",
+            "password": "12345",
+            "role": "candidate"
+        },
+        {
+            "username": "Rishi",
+            "email": "himanshulohia@candidate.com",
+            "password": "12345",
+            "role": "candidate"
+        },
+        {
+            "username": "Himanshu Lohia",
+            "email": "himanshu@admin.com",
+            "password": "123456789",
+            "role": "admin"
+        }
+    ]
+}

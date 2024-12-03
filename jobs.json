@@ -1,0 +1,14 @@
+{
+    "jobs": [
+        {
+            "id": 1,
+            "title": "Junior Scientist",
+            "description": "Develop and maintain software applications."
+        },
+        {
+            "id": 2,
+            "title": "Software Intern",
+            "description": "Analyze data to provide actionable insights."
+        }
+    ]
+}

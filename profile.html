@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #1f2a3a;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .main-content h2 {
+            color: #2e3b4e;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        footer {
+            background-color: #2e3b4e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        form input, form button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Candidate Dashboard</h2>
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('jobs') }}">Jobs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="card">
+                <h3>Profile Information</h3>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Full Name:</strong> {{ user.full_name }}</p>
+                <p><strong>Phone Number:</strong> {{ user.phone }}</p>
+            </div>
+            <div class="card">
+                <h3>Update Profile</h3>
+                <form action="{{ url_for('profile') }}" method="POST">
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" id="full_name" name="full_name" value="{{ user.full_name }}" required>
+                
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" value="{{ user.phone }}" required>
+                
+                    <input type="submit" value="Update Profile">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 DRDO Recruitment Assessment Center. All rights reserved.</p>
+    </footer>
+</body>
+</html>

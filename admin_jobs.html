@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Jobs</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #1f2a3a;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #2e3b4e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #2e3b4e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1f2a3a;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+        }
+
+        .option-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .option-container input[type="text"] {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <a href="{{ url_for('admin_dashboard') }}">Home</a>
+            <a href="{{ url_for('admin_jobs') }}" class="active">Jobs</a>
+            <a href="{{ url_for('admin_messages') }}">Messages</a>
+            <a href="{{ url_for('admin_notifications') }}">Notifications</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="card">
+                <h3>Create New Job</h3>
+                <form action="{{ url_for('create_job') }}" method="post">
+                    <input type="text" name="job_title" placeholder="Job Title" required>
+                    <textarea name="job_description" placeholder="Job Description" required></textarea>
+                    <input type="submit" value="Create Job">
+                </form>
+            </div>
+            <div class="card">
+                <h3>Create Quiz for Job</h3>
+                <form action="{{ url_for('create_quiz') }}" method="post">
+                    <input type="hidden" name="job_id" value="{{ job_id }}" required>
+                    <div class="question-container">
+                        {% for i in range(1, 31) %}
+                        <div>
+                            <h4>Question {{ i }}</h4>
+                            <input type="text" name="question{{ i }}" placeholder="Enter Question {{ i }}" required>
+                            <div class="option-container">
+                                <input type="text" name="question{{ i }}_option1" placeholder="Option 1" required>
+                                <label>
+                                    <input type="checkbox" name="question{{ i }}_correct_option" value="1">
+                                    Correct
+                                </label>
+                            </div>
+                            <div class="option-container">
+                                <input type="text" name="question{{ i }}_option2" placeholder="Option 2" required>
+                                <label>
+                                    <input type="checkbox" name="question{{ i }}_correct_option" value="2">
+                                    Correct
+                                </label>
+                            </div>
+                            <div class="option-container">
+                                <input type="text" name="question{{ i }}_option3" placeholder="Option 3" required>
+                                <label>
+                                    <input type="checkbox" name="question{{ i }}_correct_option" value="3">
+                                    Correct
+                                </label>
+                            </div>
+                            <div class="option-container">
+                                <input type="text" name="question{{ i }}_option4" placeholder="Option 4" required>
+                                <label>
+                                    <input type="checkbox" name="question{{ i }}_correct_option" value="4">
+                                    Correct
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="Create Quiz">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 DRDO Recruitment Assessment Center. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

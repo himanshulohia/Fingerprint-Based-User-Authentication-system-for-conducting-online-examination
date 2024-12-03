@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #1f2a3a;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            max-width: 100%;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            overflow-y: auto;
+            max-height: 400px; /* Adjust this as needed */
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f4f4f4;
+        }
+        .message:nth-child(odd) {
+            background-color: #e1e1e1; /* Alternating background color for messages */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        textarea {
+            width: calc(100% - 20px); /* Adjust width to fit within the container */
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none; /* Prevent resizing */
+        }
+        input[type="submit"] {
+            align-self: flex-end;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2e3b4e;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1f2a3a;
+        }
+        footer {
+            background-color: #2e3b4e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Help</h2>
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('jobs') }}">Jobs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="card">
+                <h3>Help</h3>
+                <div class="chat-container">
+                    {% for message in messages %}
+                        <div class="message">
+                            <strong>{{ message.username }}:</strong> {{ message.message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <form action="{{ url_for('help') }}" method="POST">
+                    <textarea name="message" rows="4" placeholder="Type your message here..." aria-label="Message content"></textarea>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 DRDO Recruitment Assessment Center. All rights reserved.</p>
+    </footer>
+</body>
+</html>
